@@ -51,3 +51,12 @@ textarea
 {
 	cursor: pointer !important;
 }
+
+.page {
+	margin-top: -40px;
+}
+
+.page textarea
+{
+	text-align: center;
+}

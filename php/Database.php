@@ -58,10 +58,14 @@ class Database
 		return null;
 	}
 
-	public function addBin($content, $salt, $longID)
+	public function addBin($content, $salt, $longID, $expiration)
 	{
 		$time = time();
-		$stmt = $this->mysqli->prepare("INSERT INTO `bins` (`id`, `content`, `time_creation`, `time_expiration`, `salt`, `long_id`) VALUES (NULL,?,$time,-1,'$salt','$longID')");
+		if ($expiration > 0)
+		{
+			$expiration = $time+$expiration;
+		}
+		$stmt = $this->mysqli->prepare("INSERT INTO `bins` (`id`, `content`, `time_creation`, `time_expiration`, `salt`, `long_id`) VALUES (NULL,?,$time,$expiration,'$salt','$longID')");
 		$null = NULL;
 		$stmt->bind_param("b", $null);
 		$stmt->send_long_data(0, $content);

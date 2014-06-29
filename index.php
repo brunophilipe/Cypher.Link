@@ -44,9 +44,9 @@ $db = new Database();
 						<div class="inner">
 							<h3 class="masthead-brand"><div></div>CypherLink<small> beta</small></h3>
 							<ul class="nav masthead-nav">
-								<li class="active"><a href="#">New Link</a></li>
-								<li><a href="#">About</a></li>
-								<li><a href="#">Contact</a></li>
+								<li class="active"><a href="/">New Link</a></li>
+								<li><a href="/about.php">About</a></li>
+								<li><a href="/contact.php">Contact</a></li>
 							</ul>
 						</div>
 					</div>
@@ -86,7 +86,7 @@ $db = new Database();
 
 					<div class="mastfoot">
 						<div class="inner">
-							<p>Created by <a href="https://brunophilipe.com">Bruno Philipe</a> &mdash; Disclaimer: This is beta software. Source available on GitHub<br>All Rights Reserved &mdash; 2014 Bruno Philipe</p>
+							<p>Created by <a href="https://brunophilipe.com">Bruno Philipe</a> &mdash; Disclaimer: This is beta software. Source available on <a href="https://github.com/brunophilipe/Cypher.Link" target="_blank">GitHub</a><br>All Rights Reserved &mdash; 2014 Bruno Philipe</p>
 						</div>
 					</div>
 				</div>

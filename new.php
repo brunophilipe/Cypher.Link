@@ -8,15 +8,25 @@ $db = new Database();
 
 $error = false;
 
-if (isset($_POST['bin']) && strcmp($_POST['bin'], "") != 0)
+if (isset($_POST['bin']) && strcmp($_POST['bin'], "") != 0 &&
+	isset($_POST['expiration']) && strcmp($_POST['expiration'], "") != 0)
 {
 	$rawbin = $_POST['bin'];
-	$key = Encryption::generateKey();
-	$iv = Encryption::generateIV();
-	$encbin = Encryption::encrypt($rawbin, $key, $iv);
-	$longID = Encryption::generateRandomString();
+	$expiration = $_POST['expiration'];
 
-	$db->addBin($encbin, base64_encode($iv), $longID);
+	if (!is_numeric($expiration))
+	{
+		$error = true;
+	}
+	else
+	{
+		$key = Encryption::generateKey();
+		$iv = Encryption::generateIV();
+		$encbin = Encryption::encrypt($rawbin, $key, $iv);
+		$longID = Encryption::generateRandomString();
+
+		$db->addBin($encbin, base64_encode($iv), $longID, $expiration);
+	}
 } else {
 	$error = true;
 }
@@ -114,7 +124,7 @@ if (isset($_POST['bin']) && strcmp($_POST['bin'], "") != 0)
 
 		<div class="mastfoot">
 			<div class="inner">
-				<p>Created by <a href="https://brunophilipe.com">Bruno Philipe</a> &mdash; Disclaimer: This is beta software. Source available on GitHub<br>All Rights Reserved &mdash; 2014 Bruno Philipe</p>
+				<p>Created by <a href="https://brunophilipe.com">Bruno Philipe</a> &mdash; Disclaimer: This is beta software. Source available on <a href="https://github.com/brunophilipe/Cypher.Link" target="_blank">GitHub</a><br>All Rights Reserved &mdash; 2014 Bruno Philipe</p>
 			</div>
 		</div>
 	</div>

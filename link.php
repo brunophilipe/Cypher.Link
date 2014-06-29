@@ -7,6 +7,7 @@ $html = new HTMLProcedural();
 $db = new Database();
 
 $error = false;
+$expired = false;
 
 if (isset($_GET['longID']) && strcmp($_GET['longID'], "") != 0 && isset($_GET['key']) && strcmp($_GET['key'], "") != 0)
 {
@@ -18,14 +19,34 @@ if (isset($_GET['longID']) && strcmp($_GET['longID'], "") != 0 && isset($_GET['k
 	{
 		$error = true;
 	} else {
-		$encbin = $bin['content'];
-		$rawbin = Encryption::decrypt($encbin, base64_decode($key64), base64_decode($bin['salt']));
+		$expiration = $bin['time_expiration'];
+		if ($expiration > 0 && $expiration < time())
+		{
+			$expired = true;
+		}
+		else
+		{
+			$encbin = $bin['content'];
+			$rawbin = Encryption::decrypt($encbin, base64_decode($key64), base64_decode($bin['salt']));
+		}
 	}
 }
 else if (isset($_GET['longID']) && strcmp($_GET['longID'], "") != 0)
 {
 	$longID = $_GET['longID'];
 	$key64 = null;
+
+	$bin = $db->getBinByLongID($longID);
+	if ($bin === null)
+	{
+		$expired = true;
+	} else {
+		$expiration = $bin['time_expiration'];
+		if ($expiration > 0 && $expiration < time())
+		{
+			$expired = true;
+		}
+	}
 }
 else
 {
@@ -80,12 +101,15 @@ else
 			<div class="container">
 				<?php
 
-				if (!$error && !is_null($key64))
+				if (!$expired && !$error && !is_null($key64))
 				{
 					$html->append(factory("h3", "Cypher Link: $longID", array("cover-heading")));
 					$html->append(factory("p", factory("small", "", array("unixdate"), null, array("data-time"=>$bin['time_creation']))));
 					$html->append(factory("textarea", $rawbin, array("col-lg-10", "col-lg-offset-1", "col-md-10", "col-md-offset-1", "col-sm-12", "col-xs-12"), null, array("readonly")));
 					$html->wrap("div", array("inner", "cover"));
+					$html->render();
+				} else if ($expired) {
+					$html->append(factory("h3", "The Cypher Link '$longID' doesn't exist. Maybe it expired?", array("cover-heading")));
 					$html->render();
 				} else {
 					$html->append(factory("h3", "The Cypher Link '$longID' is Encrypted and Cypher.Link doesn't store keys.", array("cover-heading")));
@@ -107,7 +131,7 @@ else
 
 			<div class="mastfoot">
 				<div class="inner">
-					<p>Created by <a href="https://brunophilipe.com">Bruno Philipe</a> &mdash; Disclaimer: This is beta software. Source available on GitHub<br>All Rights Reserved &mdash; 2014 Bruno Philipe</p>
+					<p>Created by <a href="https://brunophilipe.com">Bruno Philipe</a> &mdash; Disclaimer: This is beta software. Source available on <a href="https://github.com/brunophilipe/Cypher.Link" target="_blank">GitHub</a><br>All Rights Reserved &mdash; 2014 Bruno Philipe</p>
 				</div>
 			</div>
 		</div>
@@ -122,9 +146,9 @@ else
 	<script>
 		function reloadWithKey()
 		{
+			var longID = "<?php echo $longID; ?>";
 			var key = $('#keyfield').val();
-			var url = document.URL;
-			url += "/"+key;
+			var url = "http://cypher.link/"+longID+"/"+key;
 			window.location.href = url;
 		}
 
