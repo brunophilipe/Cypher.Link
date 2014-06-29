@@ -1,0 +1,53 @@
+textarea
+{
+	height: 300px;
+	margin: 30px 0;
+	padding: 10px;
+
+	font-size: 16px;
+	font-family: monospace;
+
+	background-color: #333333;
+	border-color: #444444;
+}
+
+.masthead-brand div
+{
+	width: 32px;
+	height: 32px;
+	background-size: 32px;
+	background-image: url("../img/cypherlink@2x.png");
+	display: inline-block;
+	vertical-align: text-bottom;
+}
+
+.spacer
+{
+	margin-top: 100px;
+}
+
+.input-group-addon
+{
+	text-shadow: none;
+}
+
+input
+{
+	cursor: default !important;
+}
+
+textarea
+{
+	width: 100%;
+}
+
+#getlink
+{
+	display: block;
+	margin: 0;
+}
+
+#getlink:hover
+{
+	cursor: pointer !important;
+}
