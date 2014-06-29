@@ -58,17 +58,17 @@ $db = new Database();
 								<textarea placeholder="Start by pasting your content here." name="bin"></textarea>
 								<div>
 									<span style="float: right; display: block">
-										Expires in:<br class="visible-xs">
+										Expires:<br class="visible-xs">
 										<select name="expiration">
 											<option value="-1">Never</option>
-											<option value="60">1 Minute</option>
-											<option value="300">5 Minutes</option>
-											<option value="1800">30 Minutes</option>
-											<option value="3600">1 Hour</option>
-											<option value="21600">6 Hours</option>
-											<option value="86400">1 Day</option>
-											<option value="2592000">1 Month</option>
-											<option value="31104000">1 Year</option>
+											<option value="60">in 1 Minute</option>
+											<option value="300">in 5 Minutes</option>
+											<option value="1800">in 30 Minutes</option>
+											<option value="3600">in 1 Hour</option>
+											<option value="21600">in 6 Hours</option>
+											<option value="86400">in 1 Day</option>
+											<option value="2592000">in 1 Month</option>
+											<option value="31104000">in 1 Year</option>
 										</select>
 									</span>
 									<input type="submit" class="btn btn-lg btn-default" id="getlink" value="Get Cypher Link">
