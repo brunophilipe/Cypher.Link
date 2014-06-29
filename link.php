@@ -112,7 +112,7 @@ else
 					$html->append(factory("h3", "The Cypher Link '$longID' doesn't exist. Maybe it expired?", array("cover-heading")));
 					$html->render();
 				} else {
-					$html->append(factory("h3", "The Cypher Link '$longID' is Encrypted and Cypher.Link doesn't store keys.", array("cover-heading")));
+					$html->append(factory("h3", "The Cypher Link '$longID' is encrypted and Cypher.Link doesn't store keys.", array("cover-heading")));
 					$html->append(factory("p", "You need to provide the Cypher Key yourself. Please paste the key in the field below:"));
 
 					$form = new HTMLProcedural();
