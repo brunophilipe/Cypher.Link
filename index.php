@@ -76,13 +76,6 @@ $db = new Database();
 							</form>
 						</div>
 					</div>
-					<?php/*
-					<br>
-					<div class="row">
-						<p>1536 Cypher Links have already been created anonymously.</p>
-					</div>
-					*/
-					?>
 
 					<div class="mastfoot">
 						<div class="inner">
