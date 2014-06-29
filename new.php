@@ -125,8 +125,8 @@ if (isset($_POST['bin']) && strcmp($_POST['bin'], "") != 0 &&
 		<div class="mastfoot">
 			<div class="inner">
 				<p>
-					Created by <a href="https://brunophilipe.com">Bruno Philipe</a> &mdash; Disclaimer: This is beta software. By using it you agree with the <a href="about.php">terms in the license</a>.<br>
-					Source available on <a href="https://github.com/brunophilipe/Cypher.Link" target="_blank">GitHub</a><br>
+					Created by <a href="https://brunophilipe.com">Bruno Philipe</a> &mdash; Disclaimer: This is beta software.<br>
+					By using it you agree with the <a href="about.php">terms in the license</a>. Source available on <a href="https://github.com/brunophilipe/Cypher.Link" target="_blank">GitHub</a><br>
 					All Rights Reserved &mdash; 2014 Bruno Philipe
 				</p>
 			</div>

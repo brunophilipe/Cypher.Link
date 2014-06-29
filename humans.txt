@@ -3,13 +3,14 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    Bruno Philipe -- Lead Developer -- @brunophilipe
 
 # THANKS
 
-    <name>
+    Tony Edwards for helping with the JS.
 
 # TECHNOLOGY COLOPHON
 
     HTML5, CSS3
-    Normalize.css, jQuery, Modernizr
+    jQuery, Modernizr
+    PHP, MySQL
