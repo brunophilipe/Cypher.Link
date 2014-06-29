@@ -60,3 +60,8 @@ textarea
 {
 	text-align: center;
 }
+
+select, select option
+{
+	color: #000;
+}
