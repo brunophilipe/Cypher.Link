@@ -1,3 +1,7 @@
+<?php
+require_once 'php/Database.php';
+$db = new Database();
+?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -44,6 +48,7 @@
 			<div class="container page">
 				<div>
 					<h2>About</h2>
+					<p>In total, <?php echo $db->getBinsCount(); ?> Cypher Links were created by anonymous users since June 29, 2014.</p>
 					<p>Cypher.Link was created with the intention to give people a tool that allowed them to share or
 						store private information in a way that was free and easy to use.</p>
 					<p>Most tools of this kind I found on the internet used client-side encryption which, despite in

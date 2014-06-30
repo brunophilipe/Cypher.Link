@@ -71,4 +71,16 @@ class Database
 		$stmt->send_long_data(0, $content);
 		return $stmt->execute();
 	}
+
+	public function getBinsCount()
+	{
+		$res = $this->mysqli->query("SHOW TABLE STATUS LIKE 'bins';");
+		for ($row_no = 0; $row_no < $res->num_rows; $row_no++) {
+			$res->data_seek($row_no);
+			$array = $res->fetch_assoc();
+			return $array['Auto_increment'];
+		}
+
+		return -1;
+	}
 }
