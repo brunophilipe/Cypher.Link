@@ -17,7 +17,7 @@ $db = new Database();
 		<title>Cypher.Link</title>
 		<link href="/css/bootstrap.css" rel="stylesheet">
 		<link href="/css/full.css" rel="stylesheet">
-		<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,700' rel='stylesheet' type='text/css'>
+		<link href='/css/fonts.css' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
 		<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
