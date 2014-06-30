@@ -50,8 +50,8 @@
 						theory being safer, either didn't work or were very slow. I also wanted to provide a tool
 						that worked on mobile devices, and most of those don't have a js engine powerful enough to
 						encrypt large chunks of data. For this reason I chose to do a server-side encryption.</p>
-					<p>The entire source of this project is available on GitHub. Please feel free to explore the code,
-						find problems and improvements.</p>
+					<p>The entire source of this project is available on GitHub. Please feel free to explore the code
+						to find problems and improvements.</p>
 					<p>I have created this tool with the intention of making it useful, but I do not claim it to be
 						correct or optimal in any way. By using this tool you accept the terms of the license to
 						follow:</p>
