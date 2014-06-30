@@ -47,7 +47,7 @@
 					<p>Cypher.Link was created with the intention to give people a tool that allowed them to share or
 						store private information in a way that was free and easy to use.</p>
 					<p>Most tools of this kind I found on the internet used client-side encryption which, despite in
-						theory being safer, either didn't work or was very slow. I also wanted to provide a tool
+						theory being safer, either didn't work or were very slow. I also wanted to provide a tool
 						that worked on mobile devices, and most of those don't have a js engine powerful enough to
 						encrypt large chunks of data. For this reason I chose to do a server-side encryption.</p>
 					<p>The entire source of this project is available on GitHub. Please feel free to explore the code,
