@@ -72,6 +72,12 @@ class Database
 		return $stmt->execute();
 	}
 
+	public function deleteBin($id)
+	{
+		if (is_numeric($id) && $id > 0)
+			$this->mysqli->query("DELETE FROM bins WHERE id='$id';");
+	}
+
 	public function getBinsCount()
 	{
 		$res = $this->mysqli->query("SHOW TABLE STATUS LIKE 'bins';");
@@ -83,4 +89,15 @@ class Database
 
 		return -1;
 	}
+
+	public function deleteExpiredBins()
+	{
+		$this->mysqli->query("DELETE FROM `bins` WHERE (`time_expiration` > 0) && (`time_expiration` < UNIX_TIMESTAMP());");
+	}
+}
+
+function runDatabaseCron()
+{
+	$db = new Database();
+	$db->deleteExpiredBins();
 }

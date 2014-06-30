@@ -45,6 +45,7 @@ else if (isset($_GET['longID']) && strcmp($_GET['longID'], "") != 0)
 		if ($expiration > 0 && $expiration < time())
 		{
 			$expired = true;
+			$db->deleteBin($bin['id']);
 		}
 	}
 }
