@@ -26,7 +26,7 @@
 					<ul class="nav navbar-nav">
 						<li><a href="/">New Link</a></li>
 						<li><a href="/about.php">About</a></li>
-						<li><a href="/contact.php">Contact</a></li>
+						<li class="active"><a href="/contact.php">Contact</a></li>
 					</ul>
 				</div>
 			</div>
