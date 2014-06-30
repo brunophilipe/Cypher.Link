@@ -16,22 +16,46 @@ class HTMLProcedural
 		$this->append(factory($tag, $contents, $classes, $id, $extras));
 	}
 
+	/**
+	 * Returns the accumulated contents (using `append()`) of this objects. To print the contents directly,
+	 * see `render()`.
+	 */
 	public function contents()
 	{
 		return $this->contents;
 	}
 
+	/**
+	 * Erases the accumulated content of this object by setting it to an empty array.
+	 */
 	public function clear()
 	{
 		$this->contents = '';
 	}
 
+	/**
+	 * Prints the contents of this object using echo. To get the contents as a variable, see `contents()`.
+	 */
 	public function render()
 	{
 		echo $this->contents;
 		$this->clear();
 	}
 
+	/**
+	 * Generates a tag as a string. To create a tag without a closing element (e.g. `<input type="text" />` pass
+	 * contents = null.
+	 *
+	 * See `factory_a(6)` to generate inline link tags and `factory_img(4)` to generate image tags.
+	 *
+	 * @param string $tag The name of the tag to be generated. For example: "div", "input", or "p".
+	 * @param string $contents The contents of the tag to be generated.
+	 * @param array=null $classes List of strings with the classes to be set in this tag.
+	 * @param string=null $id The ID of this tag.
+	 * @param array=null $extras Extra attributes to add to this tag. For example: `array("href"=>"/home", "readonly")`.
+	 *
+	 * @return string The generated tag as a string. For example: `<a href="/home">Go Home</a>`.
+	 */
 	static public function factory($tag, $contents, $classes = null, $id = null, $extras = null)
 	{
 		$element = '<'.$tag;
@@ -77,6 +101,13 @@ class HTMLProcedural
 		return $element;
 	}
 
+	/**
+	 * @param string $src The source of the image tag to be generated.
+	 * @param string $alt The alternative text for this image. The default value is an empty string.
+	 * @param null $classes
+	 * @param null $id
+	 * @return string
+	 */
 	static public function factory_img($src, $alt = "", $classes = null, $id = null)
 	{
 		$extras = array("src"=>$src, "alt"=>$alt);

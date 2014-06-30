@@ -17,8 +17,10 @@ if (isset($_GET['longID']) && strcmp($_GET['longID'], "") != 0 && isset($_GET['k
 	$bin = $db->getBinByLongID($longID);
 	if ($bin === null)
 	{
-		$error = true;
-	} else {
+		$expired = true;
+	}
+	else
+	{
 		$expiration = $bin['time_expiration'];
 		if ($expiration > 0 && $expiration < time())
 		{
