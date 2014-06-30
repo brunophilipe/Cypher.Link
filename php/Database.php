@@ -49,6 +49,7 @@ class Database
 
 	public function getBinByLongID($longID)
 	{
+		$longID = preg_replace("/[`'\\@=! \\*]/", "", $longID);
 		$res = $this->mysqli->query("SELECT * FROM bins WHERE long_id='$longID';");
 		for ($row_no = 0; $row_no < $res->num_rows; $row_no++) {
 			$res->data_seek($row_no);
