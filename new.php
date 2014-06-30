@@ -65,8 +65,6 @@ if (isset($_POST['bin']) && strcmp($_POST['bin'], "") != 0 &&
 				</div>
 			</div>
 		</nav>
-		<div class="spacer hidden-xs"></div>
-
 		<?php
 
 		if (!$error)

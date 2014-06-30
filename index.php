@@ -66,6 +66,7 @@ $db = new Database();
 					</form>
 				</div>
 			</div>
+			<div class="spacer hidden-xs"></div>
 			<footer class="text-center">
 				<p>
 					Created by <a href="https://brunophilipe.com">Bruno Philipe</a> &mdash; Disclaimer: This is beta software.<br>

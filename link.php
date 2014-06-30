@@ -87,7 +87,6 @@ else
 				</div>
 			</div>
 		</nav>
-		<div class="spacer hidden-xs"></div>
 		<div class="container">
 			<?php
 
