@@ -54,114 +54,98 @@ else
 }
 
 ?>
-
-	<!DOCTYPE html>
-	<html lang="en" xmlns="http://www.w3.org/1999/html">
+<!DOCTYPE html>
+<html class="full" lang="en">
 	<head>
 		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="">
-		<meta name="author" content="">
-		<!--<link rel="icon" href="favicon.ico">-->
-
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Create encrypted links to store and share your private content.">
+		<meta name="author" content="Bruno Philipe <hello@brunophilipe.com>">
 		<title>Cypher.Link</title>
-
-		<!-- Bootstrap core CSS -->
 		<link href="/css/bootstrap.css" rel="stylesheet">
-
-		<!-- Custom styles for this template -->
-		<link href="/css/cover.css" rel="stylesheet">
-		<link href="/css/cypherlink.css" rel="stylesheet">
-
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<script src="/js/ie10-viewport-bug-workaround.js"></script>
-
-		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
+		<link href="/css/full.css" rel="stylesheet">
+		<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,700' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
-	<div class="site-wrapper">
-		<div class="cover-container">
-			<div class="masthead clearfix">
-				<div class="inner">
-					<h3 class="masthead-brand"><div></div>CypherLink<small> beta</small></h3>
-					<ul class="nav masthead-nav">
+		<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/">Cypher.Link</a>
+				</div>
+				<div class="collapse navbar-collapse navbar-ex1-collapse">
+					<ul class="nav navbar-nav">
 						<li><a href="/">New Link</a></li>
-						<li><a href="#">About</a></li>
-						<li><a href="#">Contact</a></li>
+						<li><a href="/about.php">About</a></li>
+						<li><a href="/contact.php">Contact</a></li>
 					</ul>
 				</div>
 			</div>
+		</nav>
+		<div class="spacer hidden-xs"></div>
+		<div class="container">
+			<?php
 
-			<div class="spacer hidden-xs"></div>
-			<div class="container">
-				<?php
+			if (!$expired && !$error && !is_null($key64))
+			{
+				$html->append(factory("h3", "Cypher Link: $longID", array("text-center")));
+				$html->append(factory("p", factory("small", "", array("unixdate"), null, array("data-time"=>$bin['time_creation'])), array("text-center", "desc")));
+				$html->append(factory("textarea", $rawbin, array("col-lg-10", "col-lg-offset-1", "col-md-10", "col-md-offset-1", "col-sm-12", "col-xs-12"), null, array("readonly")));
+				$html->wrap("div", array("inner", "cover"));
+				$html->render();
+			} else if ($expired) {
+				$html->append(factory("h3", "The Cypher Link '$longID' doesn't exist. Maybe it expired?", array("cover-heading")));
+				$html->render();
+			} else {
+				$html->append(factory("h3", "The Cypher Link '$longID' is encrypted and Cypher.Link doesn't store keys.", array("cover-heading")));
+				$html->append(factory("p", "You need to provide the Cypher Key yourself. Please paste the key in the field below:"));
 
-				if (!$expired && !$error && !is_null($key64))
-				{
-					$html->append(factory("h3", "Cypher Link: $longID", array("cover-heading")));
-					$html->append(factory("p", factory("small", "", array("unixdate"), null, array("data-time"=>$bin['time_creation']))));
-					$html->append(factory("textarea", $rawbin, array("col-lg-10", "col-lg-offset-1", "col-md-10", "col-md-offset-1", "col-sm-12", "col-xs-12"), null, array("readonly")));
-					$html->wrap("div", array("inner", "cover"));
-					$html->render();
-				} else if ($expired) {
-					$html->append(factory("h3", "The Cypher Link '$longID' doesn't exist. Maybe it expired?", array("cover-heading")));
-					$html->render();
-				} else {
-					$html->append(factory("h3", "The Cypher Link '$longID' is encrypted and Cypher.Link doesn't store keys.", array("cover-heading")));
-					$html->append(factory("p", "You need to provide the Cypher Key yourself. Please paste the key in the field below:"));
+				$form = new HTMLProcedural();
+				$form->append(factory("span","Cypher Key", array("input-group-addon")));
+				$form->append(factory("input", null, array("form-control"), "keyfield", array("placeholder"=>"Paste the key here")));
+				$form->wrap("div", array("input-group"));
+				$html->append($form->contents());
 
-					$form = new HTMLProcedural();
-					$form->append(factory("span","Cypher Key", array("input-group-addon")));
-					$form->append(factory("input", null, array("form-control"), "keyfield", array("placeholder"=>"Paste the key here")));
-					$form->wrap("div", array("input-group"));
-					$html->append($form->contents());
+				$html->append("<br><br>".factory_a("Decrypt Cypher Link", null, null, array("btn", "btn-lg","btn-default"), null, array("onClick"=>"reloadWithKey();")));
+				$html->wrap("div", array("inner", "cover"));
+				$html->render();
+			}
 
-					$html->append("<br><br>".factory_a("Decrypt Cypher Link", null, null, array("btn", "btn-lg","btn-default"), null, array("onClick"=>"reloadWithKey();")));
-					$html->wrap("div", array("inner", "cover"));
-					$html->render();
-				}
-
-				?>
-			</div>
-
-			<div class="mastfoot">
-				<div class="inner">
-					<p>
-						Created by <a href="https://brunophilipe.com">Bruno Philipe</a> &mdash; Disclaimer: This is beta software.<br>
-						By using it you agree with the <a href="about.php">terms in the license</a>. Source available on <a href="https://github.com/brunophilipe/Cypher.Link" target="_blank">GitHub</a>.<br>
-						All Rights Reserved &mdash; 2014 Bruno Philipe
-					</p>
-				</div>
-			</div>
+			?>
 		</div>
-	</div>
+		<footer class="text-center">
+			<p>
+				Created by <a href="https://brunophilipe.com">Bruno Philipe</a> &mdash; Disclaimer: This is beta software.<br>
+				By using it you agree with the <a href="about.php">terms in the license</a>. Source available on <a href="https://github.com/brunophilipe/Cypher.Link" target="_blank">GitHub</a>.<br>
+				All Rights Reserved &mdash; 2014 Bruno Philipe
+			</p>
+		</footer>
+		</div>
 
-	<!-- Bootstrap core JavaScript
-	================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/moment.js"></script>
-	<script>
-		function reloadWithKey()
-		{
-			var longID = "<?php echo $longID; ?>";
-			var key = $('#keyfield').val();
-			var url = "http://cypher.link/"+longID+"/"+key;
-			window.location.href = url;
-		}
+		<!-- JavaScript -->
+		<script src="/js/jquery-1.10.2.js"></script>
+		<script src="/js/bootstrap.js"></script>
+		<script src="/js/moment.js"></script>
+		<script>
+			function reloadWithKey()
+			{
+				var longID = "<?php echo $longID; ?>";
+				var key = $('#keyfield').val();
+				var url = "http://cypher.link/"+longID+"/"+key;
+				window.location.href = url;
+			}
 
-		$(function(){
-			$('.unixdate').each(function() {
-				var unix = $(this).attr("data-time");
-				$(this).append("Created "+moment(unix*1000).fromNow()+".");
+			$(function(){
+				$('.unixdate').each(function() {
+					var unix = $(this).attr("data-time");
+					$(this).append("Created "+moment(unix*1000).fromNow()+".");
+				});
 			});
-		});
-	</script>
+		</script>
 	</body>
 </html>
