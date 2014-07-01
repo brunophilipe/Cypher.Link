@@ -10,6 +10,6 @@
 
 global $config;
 
-$config['DB_USER'] = "cypher_link";
-$config['DB_PASS'] = "vjsbwUNQ8ThEV3PK";
-$config['DB_DBNM'] = "cypher_link";
+$config['DB_USER'] = "USERNAME";
+$config['DB_PASS'] = "PASSWORD";
+$config['DB_DBNM'] = "DATABASE";
