@@ -1,6 +1,7 @@
 <?php
 
 require_once 'Encryption.php';
+require_once 'dbconfig.php';
 
 class Database
 {
@@ -9,11 +10,9 @@ class Database
 
 	function __construct()
 	{
-		$this->config['DB_USER'] = "cypher_link";
-		$this->config['DB_PASS'] = "jh8phYD86e5m9TZ2";
-		$this->config['DB_DBNM'] = "cypher_link";
+		global $config;
 
-		$this->mysqli = new mysqli("127.0.0.1", "cypher_link", "jh8phYD86e5m9TZ2", "cypher_link");
+		$this->mysqli = new mysqli("127.0.0.1", $config['DB_USER'], $config['DB_PASS'], $config['DB_DBNM']);
 		if ($this->mysqli->connect_errno) {
 			echo "Failed to connect to MySQL: (" . $this->mysqli->connect_errno . ") " . $this->mysqli->connect_error;
 		}
